@@ -1,0 +1,19 @@
+{
+  "name": "storefront-backend-api",
+  "version": "1.0.0",
+  "description": "The backend of the StoreFront ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azutech/StoreFront-Backend-API.git"
+  },
+  "author": "Emmanuel Onugha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Azutech/StoreFront-Backend-API/issues"
+  },
+  "homepage": "https://github.com/Azutech/StoreFront-Backend-API#readme"
+}
