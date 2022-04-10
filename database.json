@@ -1,0 +1,17 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "franchise",
+      "user": "storefranchise",
+      "password": "store93"
+    },
+    "test": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "fantasy_worlds_test",
+      "user": "magical_user",
+      "password": "password123"
+    }
+  }
+  
