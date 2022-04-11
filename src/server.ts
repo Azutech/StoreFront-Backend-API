@@ -1,5 +1,5 @@
 import  express, {Request, Response} from 'express';
-import bodyParser, { json } from 'body-parser';
+import bodyParser from 'body-parser';
 
 
 const PORT: Number = 3000;
