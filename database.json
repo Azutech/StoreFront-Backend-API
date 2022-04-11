@@ -2,9 +2,9 @@
     "dev": {
       "driver": "pg",
       "host": "127.0.0.1",
-      "database": "franchise",
-      "user": "storefranchise",
-      "password": "store93"
+      "database": "coffee_by_azu",
+      "user": "coffeestore",
+      "password": "coffee93"
     },
     "test": {
       "driver": "pg",
