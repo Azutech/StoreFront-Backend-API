@@ -2,9 +2,9 @@
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
-    name VARCHAR (100),
+    name VARCHAR (100) NOT NULL,
     price INTEGER, 
-    type VARCHAR,
-    origin VARCHAR
+    type VARCHAR(50) NOT NULL,
+    origin VARCHAR(50)
 
 )
