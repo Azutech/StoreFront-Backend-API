@@ -28,14 +28,14 @@ const token: string = authorizationHeader
     ? authorizationHeader.split(' ')[1]
     : ''
 
-res.locals.userData = jwt.verify(
+res.locals.userData  = jwt.verify(
     token,
     process.env.TOKEN_SECRET as string
 )
 next()
 
     } catch (error) {
-        res.status(400).send("Invalid token");
+        res.status(400).send("unauthorized user");
     }
 
 }
