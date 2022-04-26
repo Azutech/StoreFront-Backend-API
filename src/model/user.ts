@@ -92,8 +92,8 @@ export class UserStore {
       const result = await conn.query(sql, [id]);
       // const user = result.rows[0];
       return !!result;
-    } catch (err) {
-      throw new Error(`unable delete user (${id}): ${err}`);
+    } catch (error) {
+      throw new Error(`unable delete user (${id}): ${error}`);
     }
   }
 

@@ -41,12 +41,12 @@ export class OrdersLog {
        await conn.query(order_sql, order_values)
 
        const product = await conn.query('SELECT name FROM products WHERE id = $1')
-       const product_res = product.rows[0].name
+       const product_name = product.rows[0].name
        conn.release()
 
        const result = {
          order_id: res_id,
-         product: product_res,
+         product: product_name,
          quantity: order.quantity,
          status: order.status
        }

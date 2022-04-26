@@ -99,8 +99,7 @@ const user_stores = (app: express.Application) => {
   app.get('/users/:id', getUserById)
   app.post('/users', createUser)
   app.post("/login", authenticate)
-  // app.patch('/coffees/:id', updateProduct)
-  app.delete('/coffees/:id', destroyedUser)
+  app.delete('/users/:id', destroyedUser)
   }
   
   export default user_stores

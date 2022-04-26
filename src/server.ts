@@ -2,7 +2,7 @@ import  express, {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import product_stores from './controllers/products';
-// import order_stores from './controllers/orders';
+import order_stores from './controllers/orders';
 import user_stores from './controllers/user';
 
 
@@ -19,7 +19,7 @@ app.get('/', (req: Request, res: Response) =>{
 });
 
  product_stores(app)
-//  order_stores(app)
+order_stores(app)
  user_stores(app)
 
 app.listen(PORT, () =>{
