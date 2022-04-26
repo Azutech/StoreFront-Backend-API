@@ -30,23 +30,36 @@ export class CoffeeStore {
       throw new Error(`could not find products ${id}. Not Found: ${error}`);
     }
   }
-  async createProduct(prod: product): Promise<Product[]> {
+  // async createProduct(prod: product): Promise<Product[]> {
+  //   try {
+  //     const sql =
+  //       'INSERT INTO products (name, price, type, origin) VALUES ($1, $2, $3, $4) RETURNING *';
+  //        //@ts-ignore
+  //     const conn = await client.connect();
+  //     const values= [prod.name, prod.price, prod.type, prod.origin]
+  //     const result = await conn.query(sql, values);
+  //     // const products = result.rows[0];
+  //     console.log('kkk', result);
+  //     conn.release();
+  //     return result.rows;
+  //   } catch (error) {
+  //     throw new Error(`can't this coffee with id ${prod.name}, ${error}`);
+  //   }
+  // }
+
+
+  async create(product: Product): Promise<Product[]> {
     try {
-      const sql =
-        'INSERT INTO products (name, price, type, origin) VALUES ($1, $2, $3, $4) RETURNING *';
       const conn = await client.connect();
-      const result = await conn.query(sql, [
-        prod.name,
-        prod.price,
-        prod.type,
-        prod.origin,
-      ]);
-      const products = result.rows[0];
-      console.log('kkk', result);
+      const sql =
+      "INSERT INTO products (name, price, type, origin) VALUES ($1, $2, $3, $4) RETURNING *;";
+      const values = [product.name, product.price, product.type, product.origin];
+      const res = await conn.query(sql, values);
+      const result = res.rows;
       conn.release();
-      return products;
+      return result
     } catch (error) {
-      throw new Error(`can't this coffee with id ${prod.name}, ${error}`);
+      throw new Error(`could not connect fetch data from the db ${error}`);
     }
   }
 
@@ -63,13 +76,13 @@ export class CoffeeStore {
       );
     }
   }
-  async updateProduct(prod: product): Promise<Product[]> {
+  async updateProduct(prod: product,  id: string): Promise<Product[]> {
     try {
       //@ts-ignore
       const conn = await client.connect();
       const sql =
-        'UPDATE products SET name = ($1), price = ($2) WHERE id = ($3) RETURNING *';
-        // 'UPDATE storeback SET name = ($1), type = ($2) WHERE id = ($3) RETURNING *';
+      `UPDATE products SET name = ($1), price = ($2), type = ($3), origin = ($4) WHERE id = '${id}' RETURNING *`;
+      
       const values: (string | number)[] = [
         
         prod.name,

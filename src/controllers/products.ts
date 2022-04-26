@@ -49,11 +49,12 @@ const createProduct = async   (req: Request, res: Response) =>  {
 
         }
         console.log(coffee)
-        const product = await store.createProduct(coffee)
+        const product = await store.create(coffee)
         res.json(product)
     } catch (error) {
-        res.status(500)
-        res.json(error)
+        console.log(error)
+        res.status(404)
+        res.json({message: `can't create product`})
     }
 }
 const updateProduct = async   (req: Request, res: Response) => {
@@ -65,16 +66,17 @@ const updateProduct = async   (req: Request, res: Response) => {
         }
         
         const coffee: Product = {
-            id: req.body.id,
+           
             name: req.body.name,
             price: req.body.price,
             type:  req.body.type,
             origin: req.body.origin
         }
 
-        const product = await store.updateProduct(coffee)
+        const product = await store.updateProduct(coffee, req.params.id )
         res.json(product)
     } catch (error) {
+        console.log(error)
         res.status(404)
         res.json(error)
     }

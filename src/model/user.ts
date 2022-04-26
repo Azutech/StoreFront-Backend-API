@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
 const pepper: string | undefined = process.env.BCRYPT_PASSWORD as string;
-const saltRounds = parseInt(process.env.SALT_ROUNDS as string);
+const saltRounds = parseInt(process.env.SALT_ROUNDS as string)
 
 
 export class UserStore {
@@ -40,8 +40,8 @@ export class UserStore {
       const conn = await client.connect();
 
       const sql =
-        'INSERT INTO users (username, first_name, last_name, password_digest) VALUES($1, $2, $3, $4) RETURNING *';
-      const hash = bcrypt.hashSync(user.password_digest + pepper, saltRounds);
+        'INSERT INTO users (username, first_name, last_name, password) VALUES($1, $2, $3, $4) RETURNING *';
+      const hash = bcrypt.hashSync(user.password + pepper, saltRounds);
       const result = await conn.query(sql, [
         user.username,
         user.first_name,
@@ -63,12 +63,12 @@ export class UserStore {
   async authenticate(username: string, password: string): Promise<User | null> {
     try {
       const conn = await client.connect();
-      const sql = 'SELECT Password_digest FROM users WHERE username = ($1)';
+      const sql = 'SELECT password FROM users WHERE username = ($1)';
       const result = await conn.query(sql, [username]);
       if (result.rows.length) {
         const uPassDigest = result.rows[0];
         if (
-          bcrypt.compareSync(password + pepper, uPassDigest.password_digest)
+          bcrypt.compareSync(password + pepper, uPassDigest.password)
         ) {
           const sql = 'SELECT * FROM users WHERE username = ($1)';
           const User = await conn.query(sql, [username]);

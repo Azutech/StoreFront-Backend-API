@@ -2,7 +2,7 @@ import client from '../utils/database';
 import { Orders } from '../interfaces/orders';
 
 export class OrdersLog {
-  async getOrder(): Promise<Orders[]> {
+  async getAllOrders(): Promise<Orders[]> {
     try {
       const conn = await client.connect();
       const sql = 'SELECT * FROM orders';
@@ -26,7 +26,7 @@ export class OrdersLog {
     }
   }
 
-  async createOrders(order: Orders, product_id: number){
+  async createOrder(order: Orders, product_id: number){
      try {
        const conn = await client.connect()
        const sql = 'INSERT INTO orders (status, user_id) VALUES ($1, $2) RETURNING *;'
@@ -58,7 +58,7 @@ export class OrdersLog {
      }
   }
 
-  async destroy(id: number): Promise<Orders[]> {
+  async destroyOrder(id: number): Promise<Orders[]> {
     try {
          const conn = await client.connect();
          const sql =  "DELETE FROM orders WHERE id = $1 RETURNING *;"
@@ -69,4 +69,33 @@ export class OrdersLog {
       throw new Error(`Could not fetch data from the database ${error}`)
     }
   }
+
+  async activeOrderbyUser(user_id: number): Promise<Orders[]> {
+    try {
+        const conn = await client.connect();
+        const sql = "SELECT * FROM orders WHERE user_id = $1 AND status = 'active'";
+        const values = [user_id];
+        const res = await conn.query(sql, values);
+        conn.release();
+        return res.rows;
+    } catch (error) {
+        throw new Error(`could not connect fetch data from the db ${error}`);
+    }
+}
+async completedOrderbyUser( user_id: number): Promise<Orders[]> {
+    try {
+        const conn = await client.connect();
+        const sql = "SELECT * FROM orders WHERE user_id = $1 AND status = 'complete'";
+        const values = [user_id];
+        const res = await conn.query(sql, values);
+        conn.release();
+        return res.rows;
+    } catch (error) {
+        throw new Error(`could not connect fetch data from the db ${error}`);
+    }
+}
+
+
+
+
 }

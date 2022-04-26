@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import User from '../interfaces/users';
 import { UserStore } from '../model/user';
 // import jwt from 'jsonwebtoken'
@@ -10,7 +10,7 @@ const getUser = async (req: Request, res: Response) => {
     const users = await userUX.getUsers();
     res.status(200).json({
       status: 'Success',
-      message: 'All products were found successfully',
+      message: 'User has been found',
       data: users,
     });
   } catch (error) {
@@ -20,17 +20,13 @@ const getUser = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    if (!(req.query.username || req.query.password)) {
-      return res.status(400).json({
-        error: 'Missing Username or Password',
-      });
-    }
+    
     const user: User = {
-      username: req.query.username as string,
-      first_name: req.query.first_name as string,
-      last_name: req.query.last_name as string,
-      password_digest: req.query.password_digest as string,
-      password: req.query.password as string
+      username: req.body.username,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+    
+      password: req.body.password
     };
 
     
@@ -40,6 +36,7 @@ const createUser = async (req: Request, res: Response) => {
     const userUI = await userUX.createUser(user);
     res.status(200).json(userUI);
   } catch (error) {
+    console.log(error)
     return res.status(404).json({ error: `Can't create user` });
   }
 };
@@ -94,4 +91,16 @@ const destroyedUser = async (req: Request, res: Response) => {
   }
 };
 
-export default { createUser, getUser, getUserById, destroyedUser, authenticate };
+// export default { createUser, getUser, getUserById, destroyedUser, authenticate };
+
+
+const user_stores = (app: express.Application) => {
+  app.get('/users', getUser)
+  app.get('/users/:id', getUserById)
+  app.post('/users', createUser)
+  app.post("/login", authenticate)
+  // app.patch('/coffees/:id', updateProduct)
+  app.delete('/coffees/:id', destroyedUser)
+  }
+  
+  export default user_stores
