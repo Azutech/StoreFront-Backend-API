@@ -1,9 +1,9 @@
 
 
 export type Orders = {
+     id?: string;
      status: string;
-     quantity?: string;
-     user_id: number
+     userId: string
 }
 
 

@@ -10,6 +10,9 @@ const saltRounds = parseInt(process.env.SALT_ROUNDS as string)
 export class UserStore {
   async getUsers(): Promise<User[]> {
     try {
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       const conn = await client.connect();
       const sql = 'SELECT * FROM users';
       const result = await conn.query(sql);

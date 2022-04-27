@@ -1,5 +1,5 @@
 /* Replace with your SQL commands */
 
 
-DROP TABLE if exists orders;
+DROP TABLE if exists orders cascade;
 

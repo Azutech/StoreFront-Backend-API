@@ -11,6 +11,7 @@ export const createJWTToken = (id: number, username: string): string => {
 export const userTokken = (TOKEN: string): User => {
     const user = verify(TOKEN, tokenSecret) as unknown as User;
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     return user.user;
 }
