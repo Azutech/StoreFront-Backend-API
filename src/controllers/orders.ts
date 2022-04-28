@@ -1,199 +1,144 @@
 import express, { Request, Response } from 'express';
 import { OrdersLog } from '../model/orders';
- import { Orders } from '../interfaces/orders';
-// import {userTokken } from '../utils/authentication';
-// // import verifyToken from '../middleware/auth'
-
-// const store = new OrdersLog();
-
-// const getOrder = async (req: Request, res: Response) => {
-//   try {
-//     const result = await store.getAllOrders();
-//     res.status(200).json({
-//       status: 'Success',
-//       message: 'All orders were found successfully',
-//       data: result,
-//     });
-//   } catch (error) {
-//     res.status(404);
-//     res.json(error);
-//   }
-// };
-
-// const getOrderById = async (req: Request, res: Response) => {
-//   try {
-//     const ID = Number(req.params.id);
-//     const result = await store.getOrderById(ID);
-//     res.status(200).json({
-//       status: 'Success',
-//       message: 'This order has been found successfully',
-//       data: result,
-//     });
-//   } catch (error) {
-//     res.status(404);
-//     res.json(error);
-//   }
-// };
-
-// const createOrder = async (req: Request, res: Response) => {
-//   try {
-//     // const token = req.body.token || req.query.token || req.headers.token;
-
-//     // const user_id = userTokken(token);
-
-//     const order: Orders = {
-//       status: req.body.status,
-//       quantity: req.body.quantity,
-//       user_id: req.body.user_id
-//     };
-//      console.log(order)
-    
-//      const { product_id } = req.params
+import { Orders } from '../interfaces/orders';
 
 
-//     const result = await store.createOrder( order, +product_id)
-//     res.status(200).json({
-//         status: 'Success',
-//         message: 'Order has been created successfully',
-//         data: result,
-//       });
-//   } catch (error) {
-//     console.log(error)
-//       res.status(404)
-//       res.json(error)
-//   }
-
-// };
-
-// const CompletedOrderbyUser = async (req:Request, res: Response) => {
-//     try {
-
-//         // const token = req.body.token || req.query.token || req.headers.token;
-
-//         // const user_id = userTokken(token).id
-
-//         // const result = await store.completedOrderbyUser(user_id)
-        
-//         res.status(200).json({
-//             status: 'Success',
-//             message: 'Order has been created successfully',
-//             data: ""
-//           });
-
-//     } catch (error) {
-//       res.status(404)
-//       res.json(error)
-//     }
-// }
-// const ActiveOrderbyUser = async (req:Request, res: Response) => {
-//     try {
-
-//         // const token = req.body.token || req.query.token || req.headers.token;
-
-//         // const user_id = userTokken(token)
-
-//         // const result = await store.activeOrderbyUser(user_id)
-        
-//         res.status(200).json({
-//             status: 'Success',
-//             message: 'Order has been created successfully',
-//             data: ""
-//           });
-
-//     } catch (error) {
-//       res.status(404)
-//       res.json(error)
-//     }
-// }
-
-// const destroyOrder = async (req: Request, res: Response) => {
-//   try {
-//     const result =await store.destroyOrder(Number(req.params.id));
-//     res.status(200).json({
-//         status: 'Success',
-//         message: 'Order has been deleted successfully',
-//         data: result,
-//       });
-//   } catch (error) {
-//     res.status(404);
-//     res.json(error);
-//   }
-// };
-
-
-const store = new OrdersLog()
-
+const store = new OrdersLog();
 
 const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const orders = await store.getAllOrders()
+    const orders = await store.getAllOrders();
     res.status(200).json({
       status: 'Success',
       message: 'All Orders has been found',
-      data: orders })
+      data: orders,
+    });
   } catch (error) {
-    res.status(404)
-    res.json({message: 'No Order was found'})
+    res.status(404);
+    res.json({ message: 'No Order was found' });
   }
-}
+};
 
 const getOrderById = async (req: Request, res: Response) => {
   try {
-    const order = await store.getOrderById(req.params.id)
+    const order = await store.getOrderById(req.params.id);
     res.status(200).json({
       status: 'Success',
       message: 'This Order has been found',
-      data: order })
+      data: order,
+    });
   } catch (error) {
-    res.status(404)
-    res.json({message: 'This order was not found'})
+    res.status(404);
+    res.json({ message: 'This order was not found' });
   }
-}
+};
 
-const createOrder = async(req: Request, res: Response) => {
+const createOrder = async (req: Request, res: Response) => {
   try {
-      const order : Orders = {
-          status: req.body.status,
-          userId : req.body.userId
-      }
+    const order: Orders = {
+      status: req.body.status,
+      userId: req.body.userId,
+    };
 
-    const orders = await store.createOrder(order)
+    const orders = await store.createOrder(order);
     res.status(200).json({
       status: 'Success',
       message: 'This Order has been found',
-      data: orders })
+      data: orders,
+    });
   } catch (error) {
-    console.log(error)
-    res.status(404)
-    res.json({message: 'Cant create order'})
+    console.log(error);
+    res.status(404);
+    res.json({ message: 'Cant create order' });
   }
-}
+};
 
 const destroyOrder = async (req: Request, res: Response) => {
   try {
-    const deleteOrder = await store.destroy(req.params.id)
+    const deleteOrder = await store.destroy(req.params.id);
     res.status(200).json({
       status: 'Success',
       message: 'This Order has been deleted',
-      data: deleteOrder })
+      data: deleteOrder,
+    });
   } catch (error) {
-    res.status(404)
-    res.json({message: 'Cant delete order'})
+    res.status(404);
+    res.json({ message: 'Cant delete order' });
   }
-}
+};
+
+const showUserOrders = async (req: Request, res: Response) => {
+  try {
+    const orders = await store.showUserOrders(req.params.id);
+    res.status(200).json({
+      status: 'Success',
+      message: 'This Order shows',
+      data: orders,
+    });
+  } catch (error) {
+    res.status(404);
+    res.json({ message: 'Cant show order' });
+  }
+};
+
+const addProduct = async (req: Request, res: Response) => {
+  const orderId = req.params.id;
+  const productId = req.params.id;
+  const quantity = parseInt(req.body.quantity, 10);
+
+  try {
+    const addProduct = await store.addProduct(quantity, orderId, productId);
+    res.status(200).json({
+      status: 'Success',
+      message: 'This Order has been added',
+      data: addProduct,
+    });
+  } catch (error) {
+    res.status(404);
+    res.json({ message: 'Cant add order' });
+  }
+};
+
+const completedOrders = async (req: Request, res: Response) => {
+  try {
+    const completeOrder = await store.completedOrders(req.params.id);
+    res.status(200).json({
+      status: 'Success',
+      message: 'This Order has been completed',
+      data: completeOrder,
+    });
+  } catch (err) {
+    res.status(404);
+    res.json({ message: 'Order has not been completed' });
+  }
+};
 
 
-
+const activeOrders = async (req: Request, res: Response) => {
+  try {
+    const currentOrder = await store.activeOrders(req.params.id);
+    res.status(200).json({
+      status: 'Success',
+      message: 'This Order has been completed',
+      data: currentOrder,
+    });
+  } catch (err) {
+    res.status(404);
+    res.json({ message: 'Can not find this order' });
+  }
+};
 
 // export default {getOrderById, createOrder, destroyOrder, getOrder, CompletedOrderbyUser, ActiveOrderbyUser}
 
-
 const order_stores = (app: express.Application) => {
-    app.get('/orders',  getAllOrders)
-    app.get('/orders/:id',  getOrderById)
-    app.post('/orders',  createOrder)
-    // app.patch('/coffees/:id', updateProduct)
-    app.delete('/orders/:id', destroyOrder)
-    }
-    
-    export default order_stores
+  app.get('/orders', getAllOrders);
+  app.get('/orders/:id', getOrderById);
+  app.post('/orders', createOrder);
+  app.get('/users/:id/active-orders', activeOrders);
+  app.get('/users/:id/orders', showUserOrders);
+  app.get('/users/:id/completed-orders', completedOrders);
+  app.post('orders/:id/product/:id', addProduct )
+  app.delete('/orders/:id', destroyOrder);
+};
+
+export default order_stores;
