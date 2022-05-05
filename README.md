@@ -83,7 +83,7 @@ npm run drop-db-test
 
 Github:[@Azutech](https://github.com/Azutech)\
 LinkedIn:[Emmanuel Onugha](https://www.linkedin.com/in/emmanuel-onugha/)\
-Twitter:[@salimkarbm](https://twitter.com/itz_azu)
+Twitter:[@itz_azu](https://twitter.com/itz_azu)
 
 
    - Give a :star: if you like this project
