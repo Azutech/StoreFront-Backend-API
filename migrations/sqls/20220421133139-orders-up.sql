@@ -6,4 +6,4 @@ CREATE TABLE orders (
     status VARCHAR(255) NOT NULL,
     user_id BIGINT REFERENCES users (id)
 
-)
+);

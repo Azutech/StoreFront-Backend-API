@@ -9,9 +9,9 @@
     "test": {
       "driver": "pg",
       "host": "127.0.0.1",
-      "database": "fantasy_worlds_test",
-      "user": "magical_user",
-      "password": "password123"
+      "database": "coffee_test",
+      "user": "coffeestore",
+      "password": "coffee93"
     }
   }
   

@@ -1,15 +1,17 @@
-// import express from 'express'
-// import ProductController from '../controllers/products'
+import {Router} from 'express'
+import Product from '../controllers/products'
+import verifyToken from '../middleware/auth'
+
+const product = Router()
 
 
-// const productsHandler = express.Router()
-// const controller = new ProductController
-
-// productsHandler.get('/coffee', controller.getProductsall)
-// productsHandler.get('/coffee/:id', controller.getProductById)
-// productsHandler.post('/coffee/create', controller.createProduct)
-// productsHandler.put('/coffee/id', controller.updateProduct)
-// productsHandler.delete('/coffee/id', controller.destroyProduct)
+product.get('/coffees',  Product.getProductsall)
+product.get('/coffees/:id', verifyToken, Product.getProductById)
+product.post('/coffees', verifyToken, Product.createProduct)
+product.patch('/coffees/:id', Product.updateProduct)
+product.delete('/coffees/:id', verifyToken, Product.destroyProduct)
 
 
-// export default productsHandler
+
+
+export default product

@@ -2,11 +2,10 @@ import express, {Request, Response} from "express"
 import Product from "../interfaces/products"
 import { CoffeeStore } from "../model/products"
 
+
 const store = new CoffeeStore()
 
-// export default class ProductController {
-    
-// }
+
 
 const getProductsall = async  (req: express.Request, res: express.Response) => {
     
@@ -28,20 +27,14 @@ const getProductsall = async  (req: express.Request, res: express.Response) => {
 
 
 
-//  const responeUtil = (res:Response, statusCode:number, data:any, message:string, statusMessage:string)=>{
-//   return  res.status(statusCode).json({
-//         status:statusMessage,
-//         message:message,
-//         data: data
-//     })
-//  }
+
 const createProduct = async   (req: Request, res: Response) =>  {
     console.log('abeg work')
     try {
         
-        const id = new Date().getMilliseconds()
+        
         const coffee: Product = {
-                id: id,
+               
                 name: req.body.name,
                 price: req.body.price,
                 type:  req.body.type,
@@ -100,12 +93,14 @@ const destroyProduct= async (req: Request, res: Response) => {
     }
 }
 
-const product_stores = (app: express.Application) => {
-app.get('/coffees', getProductsall)
-app.get('/coffees/:id', getProductById)
-app.post('/coffees', createProduct)
-app.patch('/coffees/:id', updateProduct)
-app.delete('/coffees/:id', destroyProduct)
-}
+export default {getProductsall, getProductById, createProduct, updateProduct, destroyProduct}
 
-export default product_stores
+// const product_stores = (app: express.Application) => {
+// app.get('/coffees',  getProductsall)
+// app.get('/coffees/:id', verifyToken, getProductById)
+// app.post('/coffees', verifyToken, createProduct)
+// app.patch('/coffees/:id', updateProduct)
+// app.delete('/coffees/:id', verifyToken, destroyProduct)
+// }
+
+// export default product_stores

@@ -7,9 +7,13 @@
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/server.ts",
-    "watch": "npm run build && npm run start",
+    "watch": "npm run build",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "test-db": "cross-env NODE_ENV=test db-migrate --env test up && jasmine",
+    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
+    "drop-db-test": "cross-env NODE_ENV=test db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "jasmine": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -41,11 +45,15 @@
     "@types/pg": "^8.6.5",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.13.0",
+    "jasmine": "^4.1.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "prettier": "2.6.2",
+    "supertest": "^6.2.3",
     "ts-node": "^10.7.0",
-    "ts-watch": "^1.0.8"
+    "tsc-watch": "^5.0.3"
   }
 }

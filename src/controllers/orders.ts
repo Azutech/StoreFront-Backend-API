@@ -1,6 +1,6 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { OrdersLog } from '../model/orders';
-import { Orders } from '../interfaces/orders';
+import  { Orders } from '../interfaces/orders';
 
 
 const store = new OrdersLog();
@@ -37,8 +37,10 @@ const createOrder = async (req: Request, res: Response) => {
   try {
     const order: Orders = {
       status: req.body.status,
-      userId: req.body.userId,
+      userId: req.body.user_id,
     };
+
+    console.log(order)
 
     const orders = await store.createOrder(order);
     res.status(200).json({
@@ -82,7 +84,7 @@ const showUserOrders = async (req: Request, res: Response) => {
 };
 
 const addProduct = async (req: Request, res: Response) => {
-  const orderId = req.params.id;
+  const orderId = req.body.id;
   const productId = req.params.id;
   const quantity = parseInt(req.body.quantity, 10);
 
@@ -94,6 +96,7 @@ const addProduct = async (req: Request, res: Response) => {
       data: addProduct,
     });
   } catch (error) {
+    console.log(error)
     res.status(404);
     res.json({ message: 'Cant add order' });
   }
@@ -128,17 +131,17 @@ const activeOrders = async (req: Request, res: Response) => {
   }
 };
 
-// export default {getOrderById, createOrder, destroyOrder, getOrder, CompletedOrderbyUser, ActiveOrderbyUser}
+export default {getOrderById, createOrder, destroyOrder, getAllOrders, showUserOrders, completedOrders, activeOrders, addProduct}
 
-const order_stores = (app: express.Application) => {
-  app.get('/orders', getAllOrders);
-  app.get('/orders/:id', getOrderById);
-  app.post('/orders', createOrder);
-  app.get('/users/:id/active-orders', activeOrders);
-  app.get('/users/:id/orders', showUserOrders);
-  app.get('/users/:id/completed-orders', completedOrders);
-  app.post('orders/:id/product/:id', addProduct )
-  app.delete('/orders/:id', destroyOrder);
-};
+// const order_stores = (app: express.Application) => {
+//   app.get('/orders', getAllOrders);
+//   app.get('/orders/:id', getOrderById);
+//   app.post('/orders', createOrder);
+//   app.get('/users/:id/active-orders', activeOrders);
+//   app.get('/users/:id/orders', showUserOrders);
+//   app.get('/users/:id/completed-orders', completedOrders);
+//   app.post('orders/:id/product/:id', addProduct )
+//   app.delete('/orders/:id', destroyOrder);
+// };
 
-export default order_stores;
+// export default order_stores;

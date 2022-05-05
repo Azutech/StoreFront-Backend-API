@@ -2,9 +2,13 @@ import client from '../utils/database';
 import { Orders } from '../interfaces/orders'
 
 
-export class OrdersLog {
-  async createOrder(order: Orders): Promise<Orders>{
+
+
+
+ export class OrdersLog {
+  async createOrder(order: Orders): Promise<Orders> {
     try {
+        console.log(typeof order.userId)
       const sql = "INSERT INTO orders (status, user_id) VALUES ($1, $2) RETURNING *";
       const conn = await client.connect();
       const values  = [order.status, order.userId]
