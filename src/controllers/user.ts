@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import  { Request, Response } from 'express';
 import User from '../interfaces/users';
 import { UserStore } from '../model/user';
 // import jwt from 'jsonwebtoken'
@@ -91,15 +91,9 @@ const destroyedUser = async (req: Request, res: Response) => {
   }
 };
 
-// export default { createUser, getUser, getUserById, destroyedUser, authenticate };
+ export default { createUser, getUser, getUserById, destroyedUser, authenticate };
 
 
-const user_stores = (app: express.Application) => {
-  app.get('/users', getUser)
-  app.get('/users/:id', getUserById)
-  app.post('/users', createUser)
-  app.post("/login", authenticate)
-  app.delete('/users/:id', destroyedUser)
-  }
-  
-  export default user_stores
+// const user_stores = (app: express.Application) => {
+
+//   export default user_stores

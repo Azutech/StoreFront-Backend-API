@@ -1,4 +1,4 @@
-import express, {Request, Response} from "express"
+import  {Request, Response} from "express"
 import Product from "../interfaces/products"
 import { CoffeeStore } from "../model/products"
 
@@ -7,7 +7,7 @@ const store = new CoffeeStore()
 
 
 
-const getProductsall = async  (req: express.Request, res: express.Response) => {
+const getProductsall = async  (req: Request, res: Response) => {
     
     try {
         const products = await store.getProductsall()

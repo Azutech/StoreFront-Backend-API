@@ -133,15 +133,4 @@ const activeOrders = async (req: Request, res: Response) => {
 
 export default {getOrderById, createOrder, destroyOrder, getAllOrders, showUserOrders, completedOrders, activeOrders, addProduct}
 
-// const order_stores = (app: express.Application) => {
-//   app.get('/orders', getAllOrders);
-//   app.get('/orders/:id', getOrderById);
-//   app.post('/orders', createOrder);
-//   app.get('/users/:id/active-orders', activeOrders);
-//   app.get('/users/:id/orders', showUserOrders);
-//   app.get('/users/:id/completed-orders', completedOrders);
-//   app.post('orders/:id/product/:id', addProduct )
-//   app.delete('/orders/:id', destroyOrder);
-// };
 
-// export default order_stores;
