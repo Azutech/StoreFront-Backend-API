@@ -1,4 +1,4 @@
-## StoreFront-Backend-API
+# StoreFront-Backend-API
 
 StoreFront is an online shopping store Api that display coffee available for purchase.
 
