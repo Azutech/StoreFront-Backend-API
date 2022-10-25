@@ -1,0 +1,152 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "StoreFront Apis",
+        "version": "2.0.0"
+    },
+    "servers": [
+        {
+            "url":"http://localhost:3000",
+            "description": "local server"
+        }
+    ],
+    
+    "paths": {
+    
+        "/api/products/coffees": {
+            "get": {
+
+                "tags": ["Products"],
+                "description": "List of products",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                 "schema":{
+                                    "type": "object",
+                                     "example": {
+                                        "count": 0,
+                                        "products": []
+                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Products"],
+                "description": "Create products",
+                "requestBody": {
+                         "content":{
+                            "application/json": {
+                                             "schema":{
+                                                "properties" : {
+                                                    "name":{
+                                                         "type": "string",
+                                                         "description": "name  of the coffee"
+                                                        },
+                                                    "price":{
+                                                        "type": "string",
+                                                        "description": "price  of the coffee"
+                                                    },
+                                                    "type":{
+                                                        "type": "string",
+                                                        "description": "type  of the coffee whether its hot or cold"
+                                                    },
+                                                    "origin":{
+                                                        "type": "string",
+                                                        "description": "The origin of the coffee"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                     }
+                                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                         "content":{
+                            "application/json": {
+                        "schema":{
+                        "type": "string",
+                        "example": "product[0]"
+                    }
+                }
+            }
+        }
+    }
+            }
+
+        },
+
+        "/api/products/coffees/id" :{
+                "get": {
+                    "tags": ["Products"],
+                    "description": "get products by their id",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "query",
+                            "description": "get the id of the products",
+                            "type": "string",
+                            "example": "2"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "content":{
+                                "application/json": {
+                                    "schema":{
+                                        "type": "object",
+                                        "example": {
+                                            "count": 0,
+                                            "products": []
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "This product can not found"
+                        }
+                    }
+                },
+
+                "delete": {
+                    "tags": ["Products"],
+                    "description": "get products by their id",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "query",
+                            "description": "delete the id of the products",
+                            "type": "string",
+                            "example": "2"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "content":{
+                                "application/json": {
+                                    "schema":{
+                                        "type": "object",
+                                        "example": {
+                                            "count": 0,
+                                            "products": []
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "This product can not be deleted"
+                        }
+                    }
+                }
+        } 
+     }
+}

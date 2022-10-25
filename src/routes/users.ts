@@ -6,7 +6,7 @@ const userRouter = Router()
 
 userRouter.get('/users', User.getUser)
   userRouter.get('/users/:id', verifyToken, User.getUserById)
-  userRouter.post('/users', verifyToken, User.createUser)
+  userRouter.post('/users', User.createUser)
   userRouter.post("/login", verifyToken, User.authenticate)
   userRouter.delete('/users/:id', verifyToken, User.destroyedUser)
   
